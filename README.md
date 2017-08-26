@@ -119,7 +119,9 @@
      </header>
 
 
-#### 3.3 引用Boostrap的导航条组件 collapse.js [文档链接](http://v3.bootcss.com/components/#navbar)
+## 4. 引用Bootstrap组件 [文档链接](http://v3.bootcss.com/components/)
+
+#### 1. 引用Boostrap的导航条组件 collapse.js [文档链接](http://v3.bootcss.com/components/#navbar)
 
 > 按需求修改响应式导航条
 
@@ -172,8 +174,92 @@
     </nav>
 
 > 1.修改nav原样式，nav中的navbar-default是bootstrap中定义的样式，我们可以找到源代码位置，拷贝到我们的css文件中修改，修改bootstrap中拷贝过来的navbar-default原样式，修改为wjs_nav，以sublime为例 查找快捷键为ctrl+p输入#navbar-default查找到位置，关于[sublime快捷键](https://github.com/XiuDe/apple/blob/master/%E5%89%8D%E7%AB%AF%E6%8E%A2%E7%A9%B6%E5%8F%8A%E4%B9%A6%E5%86%99%E6%96%87%E6%A1%A3%E6%8A%80%E5%B7%A7/%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E6%8A%80%E5%B7%A7.md)。
-> 
+ 
 > 2.Sublime在单个文件的替换ctrl+f 选择find all替换比较快捷。
+
+
+
+## 5. 引用Bootstrap的JavaScript插件  [文档链接](http://v3.bootcss.com/javascript/)
+
+#### 1. 引用Bootstrap的JavaScript轮播图插件  carousel.js [文档链接](http://v3.bootcss.com/javascript/#carousel)
+
+> 一般Bootstrap中的js插件引用，是自定义属性data-开头的。
+
+       <!-- 轮播图容器 必须声明class为carousel,
+       并且它的Bootstrap的js组件为data-ride="carousel"，
+       这样Boostrap把这个容器认作轮播图组件，能初始化这个轮播图
+       -->
+       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+         <!-- 小圆点的控制  class="carousel-indicators"为小圆点容器-->
+         <!-- Indicators -->
+         <ol class="carousel-indicators">
+         <!-- 
+             每个小圆点都应该对应着一个轮播内容容器，大部分为图片（+文字），
+             1. data-target是可以控制目标的，指明需要控制的那个容器，
+                在这里是控制id为carousel-example-generic的容器也就是最大的div容器  。
+             2. data-slide-to是控制小圆点对应的那个具体的内容容器（大部分是大的图片），
+         -->
+           <li data-target="#carousel-example-generic" data-slide-to="0"   class="active"></li>
+           <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+           <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+         </ol>
+      
+         <!-- 轮播内容的大容器 -->
+         <!-- Wrapper for slides -->
+         <div class="carousel-inner" role="listbox">
+         <!-- 
+             轮播内容为class="item", 
+             三个小圆点应该对应三个item，
+             包括了图片和文字内容
+          -->
+           <div class="item active">
+             <!-- 图片 -->
+             <img src="../wjs/images/slide_01_2000x410.jpg" alt="...">
+             <!-- 文字内容 -->
+             <div class="carousel-caption">
+               ...
+             </div>
+           </div>
+       
+           <div class="item">
+             <img src="../wjs/images/slide_01_2000x410.jpg" alt="...">
+             <div class="carousel-caption">
+               ...
+             </div>
+           </div>
+       
+           <div class="item">
+             <img src="../wjs/images/slide_01_2000x410.jpg" alt="...">
+             <div class="carousel-caption">
+               ...
+             </div>
+           </div>
+      
+         </div>
+      
+         <!-- 左右两侧的箭头 -->
+         <!-- 
+          a按钮控制上一张还是下一张，
+          我们需要知道控制谁？
+          1. 在button标签和li标签中我们用的是data-target
+          2. 在a标签中是href控制，href中的内容是轮播图容器的id，
+             在这里和上面的data-target中的内容一样
+          data-slide用来指明我们按钮的功能 prev 和    next来说明这是一个什么功能的按钮
+          -->
+         <!-- Controls -->
+         <a class="left carousel-control" href="#carousel-example-generic"   role="button" data-slide="prev">
+            <!-- 展示箭头图标的，aria开头的都是h5提供给屏幕阅读器的，
+               glyphicon glyphicon-chevron-left是Bootstrap提供的字体图标，
+            -->
+            <span class="glyphicon glyphicon-chevr on-left"   aria-hidden="true"></   span>
+            <!-- class="sr-only"是隐藏的 -->
+            <span class="sr-only">Previous</span>
+         </a>
+         <a class="right carousel-control" href="#carousel-example-generic"   role="button" data-slide="next">
+             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"><  /span>
+             <span class="sr-only">Next</span>
+         </a>
+    </div>
 
 
 
