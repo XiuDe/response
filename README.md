@@ -420,4 +420,45 @@
 
 > 在屏幕尺寸改变的时候需要重新渲染页面 监听页面尺寸的改变resize事件
 
+      // renderHtml(); 后面window下的.trigger('resize');
+      /*5.在屏幕尺寸改变的时候需要重新渲染页面 （监听页面尺寸的改变 resize）*/
+      $(window).on('resize',function(){
+      /*屏幕改变重新渲染，
+        但是屏幕每次改变ajax会不断发送请求，
+        解决方案：页面的数据缓存，
+                  在第一次请求到数据的时候sunccess中设置
+      */
+      renderHtml();
+      }).trigger('resize');/*.trigger('resize');即时执行这个事件，触发这个事件*/
 
+> 解决屏幕改变重复请求的问题
+
+        // 判断记录数据是否存在，myData为全局变量
+        if (myData) {
+            callback && callback(myData);
+            return false;
+        }
+        // ajax
+        $.ajax({
+            /*
+              js是被html引用的
+              发出请求是相对html
+              html相对于 index.json 多了一层js文件夹
+              相对路径的话 还需要加目录
+            */
+            url:'js/index.json',
+            data:{},
+            dataType:'json',
+            success:function(data){
+                /*
+                  当我们已经请求成功之后 把数据缓存在内存当中
+                  当下次调用这个方法的时候，去判断内存当中有没有记录这个数据
+                  如果有记录直接返回内存当中的，
+                  如果没有记录，再做请求
+                  这个记录，用全局变量myData
+                */
+                myData = data;
+               callback && callback(myData);
+
+            }
+        });

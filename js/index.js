@@ -12,11 +12,17 @@ function banner(){
        underscore库http://www.css88.com/doc/underscore/
      4.把渲染完成的html填充在对应的盒子里面 也就是完成了页面渲染 （渲染到页面当中 .html()）
      5.在屏幕尺寸改变的时候需要重新渲染页面 （监听页面尺寸的改变 resize）
-  
+     6.在移动端需要 通过手势来控制图片的轮播 左 next 右 prev
 	*/
-
+     // 声明全局变量，接收数据，缓存在内存当中
+     var myData;
 	/* 1.获取后台的轮播图 图片数据 （ajax） */
 	var getData = function(callback){
+		// 判断数据是否存在
+		if (myData) {
+			callback && callback(myData);
+			return false;
+		}
 		// ajax
 		$.ajax({
 			/*
@@ -29,7 +35,16 @@ function banner(){
 			data:{},
 			dataType:'json',
 			success:function(data){
-               callback && callback(data);
+				/*
+                  当我们已经请求成功之后 把数据缓存在内存当中
+                  当下次调用这个方法的时候，去判断内存当中有没有记录这个数据
+                  如果有记录直接返回内存当中的，
+                  如果没有记录，再做请求
+                  这个记录，用全局变量myData
+				*/
+				myData = data;
+               callback && callback(myData);
+
 			}
 		});
 	}
@@ -78,10 +93,14 @@ function banner(){
            $('.carousel-inner').html(imageHtml);
      	});
      }
-   renderHtml();
+   // renderHtml(); 后面window下的.trigger('resize');
    /*5.在屏幕尺寸改变的时候需要重新渲染页面 （监听页面尺寸的改变 resize）*/
    $(window).on('resize',function(){
-   	  /*屏幕改变重新渲染*/
+   	  /*屏幕改变重新渲染，
+   	    但是屏幕每次改变ajax会不断发送请求，
+   	    解决方案：页面的数据缓存，
+   	              在第一次请求到数据的时候sunccess中设置
+   	  */
       renderHtml();
-   });
+   }).trigger('resize');/*.trigger('resize');即时执行这个事件，触发这个事件*/
 }
