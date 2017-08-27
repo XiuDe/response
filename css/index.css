@@ -289,3 +289,22 @@ fieldset[disabled] .wjs_nav .btn-link:hover,
 fieldset[disabled] .wjs_nav .btn-link:focus {
   color: #ccc;
 }
+
+/*轮播图*/
+.wjs_banner{
+  
+}
+.wjs_banner .img_box{
+  display: block;
+  height: 410px;
+}
+/*轮播图移动端*/
+.wjs_banner .img_mobble{
+  width: 100%;
+  display: block;
+}
+.wjs_banner .img_mobble img{
+  width: 100%;
+  /*去除图片下边距*/
+  display: block;
+}

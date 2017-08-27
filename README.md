@@ -262,4 +262,162 @@
     </div>
 
 
+> 轮播图会随着屏幕的拉伸等比缩放，如何居中显示轮播图？<br>
+> 1. 图片需要设置为背景，而不是引入在在html标签中的`<image>`标签里，在html中用`<a>`标签代替`<image>`，然后设置a的背景。
+
+
+#### 2. 如何设置移动端轮播图
+
+> 不同于m.jd.com，jd是html的`<image>`标签来做自适应，背景无法做自适应，如果是背景该怎么设置？
+
+      <!-- 静态轮播图，存在弊端 -->
+      <!-- 背景在移动端是没法做自适应的，需要图片 -->
+        <!-- 
+             第一个a标签 适配pc端，hidden-xs在移动端不显示，屏幕大于超小屏幕显示
+             第二个a标签适配 移动端,hidden-sm hidden-md hidden-lg设置在小屏幕，中等屏幕，大屏幕隐藏。
+             这种方式存在问题，移动端加载会出现卡顿，如何解决？
+                 在pc端只加载大图片，移动端只加载小图片
+        -->
+        <a class="img_box hidden-xs" style="background: url('images/slide_01_2000x410.jpg') no-repeat center" href="#"></a>
+        <a class="img_mobble hidden-sm hidden-md hidden-lg" href="#"><img src="images/slide_01_640x340.jpg"></a>
+
+> 上面这段代码是静态的，移动端会出现卡顿，解决方案为：<br>
+> &nbsp;&nbsp;&nbsp;&nbsp;利用ajax动态模拟请求图片数据（json格式），利用js根据不同的屏幕大小，加载不同的图片，动态轮播图的形式。
+
+
+## 3.underscode库使用  [中文文档链接](http://www.css88.com/doc/underscore/)
+
+> Bootstrap下例子演示
+
+     <!DOCTYPE html>
+     <html lang="zh-CN">
+     <head>
+         <meta charset="utf-8">
+         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+         <title>title</title>
+         <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+         <!--自己的css样式-->
+         <!-- TODO -->
+     </head>
+     <body>
+     <div id="box"></div>
+    
+     <!-- TODO -->
+     <!--使用了undersocre的each方法
+     第一个参数  就当前遍历的对象
+     第二个从那时当前遍历的索引
+     -->
+     <script type="text/template" id="template">
+         <div>
+             <%_.each(model,function(item,i){%>
+                 <p><%-item.name%></p>
+             <%});%>
+         </div>
+     </script>
+     <!--说明bootstrap是基于jquery开发的-->
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) 引用的是jquery-->
+     <script src="../lib/jquery/jquery.min.js"></script>
+     <!--bootstrap的核心js文件-->
+     <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+     <!--自己的js文件  我们基于上面两个框架-->
+     <script src="../lib/underscore/underscore-min.js"></script>
+     <script>
+         $(function(){
+             /*
+             * - 是直接渲染成字符
+             * = 直接填充在html  标签是会被渲染
+             * XSS攻击：跨站脚本攻击(Cross Site Scripting)，
+             * 为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆
+             * 故将跨站脚本攻击缩写为XSS。
+             * */
+             /* 准备 json  数据*/
+             var data = [{name:'<script>alert(0);<\/script>'},{name:'xiaohong'}];
+             /* 参数是模板当中的字符串  使用template方法 返回一个模板对象*/
+             var template = _.template($('#template').html());
+             /*调用模板对象的时候  传入json数据  返回的就是解析过后的字符串*/
+             $('#box').html( template({model:data}));
+         });
+      </script>
+      </body>
+      </html>
+
+#### 总结underscore库的使用
+  1.在html需要的模板放入`<scripe>`标签中作为模板；
+
+     <!-- 需要模板的地方 -->
+     <ol class="carousel-indicators">
+          <!-- 第一个渲染模板 -->
+     </ol>
+
+     <!-- 放入script标签中 -->
+    <script type="text/template" id="template_point">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+     </script>
+
+ 2.在js文件中获取模板对象，渲染成html字符，渲染页面。
+
+     /*获取点的模板对象，利用script中的id，利用underscode库*/
+     var templatePoint = _.template($('#template_point').html());
+     /*获取图片的模板对象，利用underscode库*/
+     var templateImage = _.template($('#template_item').html());
+     /*渲染成html字符 解析成html*/
+     var pointHtml = templatePoint({});
+     /*渲染页面*/
+     $('.carousel-indicators').html(pointHtml);
+
+> 1，2为静态渲染，如果动态渲染ajax中解析数据，将数据传入2.2{}中。
+
+3.修改2中{}使数据动态添加
+
+     /*渲染成html字符 解析成html*/
+     /*{model:data} 传入的数据 名字叫model 数据是data*/
+     var pointHtml = templatePoint({model:data});
+
+
+4.将html中的静态模板内容替换
+
+    <!-- 点盒子内容模板 -->
+    <!-- 传入的model是一个数组，模板当中运行的也是js，包裹在<%%>才会被执行 -->
+    <script type="text/template" id="template_point">
+        <!-- item是对象，i是索引 打印item看看 <%console.log(item);%>-->
+        <%_.each(model,function(item,i){%>
+          <li data-target="#carousel-example-generic" data-slide-to="<%=i%>" class="<%=i==0?'active':''%>"></li>
+        <%});%>
+    </script>
+
+5.如何根据不同的屏幕展示出两张不同的图片
+
+5.1 js文件中，把步骤2完善
+
+      /*如何将ajax返回的data和判断屏幕大小的isMobile传递进去*/
+      var imageData = {
+        list:data,//图片数据
+        isMobile:isMobile//bool值判断是不是移动端
+      }
+      var imageHtml = templateImage({model:imageData});
+
+5.2 html根据不同的屏幕加载不同的轮播图片，还没做到实时监测屏幕大小
+
+    <!-- 图片内容模板 -->
+    <script type="text/template" id="template_item">
+           <%_.each(model.list,function(item,i){%>
+            <div class="item <%=i==0?'active':''%>">
+               <%if(model.isMobile){%>
+                  <!-- 通过动态渲染之后 hidden-sm hidden-md hidden-lg这些都没用了，我们已经通过js判断了 -->
+                  <a class="img_mobble" href="#"><img src="<%=item.img%>"></a>
+               <%}else{%>
+                  <a class="img_box" style="background: url('<%=item.bg%>') no-repeat center" href="#"></a>
+               <%}%>
+            </div>
+           <%});%>
+    </script>
+
+## 4.js监听页面尺寸的改变
+
+> 在屏幕尺寸改变的时候需要重新渲染页面 监听页面尺寸的改变resize事件
+
 
