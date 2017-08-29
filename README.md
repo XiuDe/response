@@ -532,5 +532,11 @@
 > ⑤在屏幕尺寸改变的时候需要重新渲染页面 （监听页面尺寸的改变事件 resize），这个事件后并且用到了jQuery中的即时执行.trigger('resize')；如果没有渲染成功 
 > `$('.carousel-indicators').html(pointHtml);`和`$('.carousel-inner').html(imageHtml);`可能出现了问题；<br>
 > ⑥在移动端需要 通过手势来控制图片的轮播 左 next 右 prev，通过控制台可以看出jquery e 返回的 originalEvent 就是原声js当中的 touchEvent。<br>
+> 
+##  7.图片、标题、描述结构和预约栏的响应式
+
+> [Bootstrap组件媒体对象](http://v3.bootcss.com/components/#media)的实际应用
+
+> Bootstrap左浮动class="pull-left" 右浮动class="pull-right"
 
 

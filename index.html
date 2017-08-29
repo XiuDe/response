@@ -99,9 +99,97 @@
       </div>
     </div>
     <!-- 信息 -->
-    <div class="wjs_info"></div>
+    <div class="wjs_info hidden-xs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <a href="#" class="media">
+                        <div class="media-left">
+                          <span class="wjs_icon wjs_icon_E903"></span>
+                        </div>
+                        <div class="media-body">
+                          <h4 class="media-heading">支付交易保障</h4>
+                          <p>银联支付全程保证支付安全</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                     <a href="#" class="media">
+                        <div class="media-left">
+                          <span class="wjs_icon wjs_icon_E903"></span>
+                        </div>
+                        <div class="media-body">
+                          <h4 class="media-heading">支付交易保障</h4>
+                          <p>银联支付全程保证支付安全</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <a href="#" class="media">
+                        <div class="media-left">
+                          <span class="wjs_icon wjs_icon_E903"></span>
+                        </div>
+                        <div class="media-body">
+                          <h4 class="media-heading">支付交易保障</h4>
+                          <p>银联支付全程保证支付安全</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <a href="#" class="media">
+                        <div class="media-left">
+                          <span class="wjs_icon wjs_icon_E903"></span>
+                        </div>
+                        <div class="media-body">
+                          <h4 class="media-heading">支付交易保障</h4>
+                          <p>银联支付全程保证支付安全</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <a href="#" class="media">
+                        <div class="media-left">
+                          <span class="wjs_icon wjs_icon_E903"></span>
+                        </div>
+                        <div class="media-body">
+                          <h4 class="media-heading">支付交易保障</h4>
+                          <p>银联支付全程保证支付安全</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <a href="#" class="media">
+                        <div class="media-left">
+                          <span class="wjs_icon wjs_icon_E903"></span>
+                        </div>
+                        <div class="media-body">
+                          <h4 class="media-heading">支付交易保障</h4>
+                          <p>银联支付全程保证支付安全</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- 预约 -->
-    <div class="wjs_book"></div>
+    <div class="wjs_book">
+        <div class="container">
+            <!-- 左浮动 -->
+            <div class="pull-left">
+               <span class="wjs_icon wjs_icon_E906"></span>
+               <span>现在有273人在排队，累计预约成功7571次。什么是预约投标？</span>
+               <a href="#" class="book_link">立即预约</a>  
+            </div>
+            <!-- 右浮动 -->
+            <div class="pull-right">
+                <a href="#" class="media_link">
+                   <span class="wjs_icon wjs_icon_E905"></span>
+                   <span>微金所企业宣传片</span>
+                </a>
+            </div>
+            
+        </div>
+    </div>
     <!-- 产品 -->
     <div class="wjs_product"></div>
     <!-- 新闻 -->
@@ -114,9 +202,9 @@
     <script type="text/template" id="template_point">
         <!-- item是对象，i是索引 -->
         <%_.each(model,function(item,i){%>
-        <%console.log(item);%>
-        <%console.log(item.bg);%>
-        <%console.log(item.img);%>
+        <!-- <%console.log(item);%> -->
+        <!-- <%console.log(item.bg);%> -->
+        <!-- <%console.log(item.img);%> -->
           <li data-target="#carousel-example-generic" data-slide-to="<%=i%>" class="<%=i==0?'active':''%>"></li>
         <%});%>
     </script>

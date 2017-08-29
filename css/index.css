@@ -308,3 +308,43 @@ fieldset[disabled] .wjs_nav .btn-link:focus {
   /*去除图片下边距*/
   display: block;
 }
+
+/*信息模块*/
+.wjs_info{
+  padding: 50px 0;
+  border-bottom: 1px solid #ccc;
+}
+.wjs_info > .container{
+  width: 910px;
+}
+.wjs_info .wjs_icon{
+  font-size: 30px;
+}
+.wjs_info .media{
+  display: block;
+  padding: 10px;
+}
+.wjs_info .media:hover{
+  color: #e92322;
+}
+.wjs_info .media > .media-left{
+  padding-top: 2px;
+}
+/* 预约 */
+.wjs_book{
+  padding: 25px 0;
+  border: 1px solid #ccc;
+}
+.wjs_book .container{
+  width: 910px;
+}
+.wjs_book .wjs_icon{
+  font-size: 24px;
+}
+.wjs_book .book_link{
+  color: #E92322;
+  border-bottom: 1px dashed #E92322;
+}
+.wjs_book .media_link:hover{
+  color: red;
+}
