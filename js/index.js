@@ -87,7 +87,7 @@ function banner(){
              isMobile:isMobile//是不是移动端
            }
            var imageHtml = templateImage({model:imageData});
-           console.log(imageHtml);
+           // console.log(imageHtml);
            /*渲染页面*/
            $('.carousel-indicators').html(pointHtml);
            $('.carousel-inner').html(imageHtml);
@@ -103,4 +103,50 @@ function banner(){
    	  */
       renderHtml();
    }).trigger('resize');/*.trigger('resize');即时执行这个事件，触发这个事件*/
+
+   
+   /*6.在移动端需要 通过手势来控制图片的轮播 左 next 右 prev*/
+   /* 
+     移动的如果是 负值下一张 正值上一张
+     用jQuery实现
+   */
+   var startX = 0;
+   var moveX = 0;
+   var distanceX = 0;
+   var isMove = false;
+   /*绑定事件*/
+   $('.wjs_banner').on('touchstart',function(e){
+   	 /*怎么获取到第一个触摸点*/
+   	 /*jquery e 返回的 originalEvent 就是原声js当中的 touchEvent*/
+   	 // console.log(e.originalEvent.touches[0].clientX);
+   	 startX = e.originalEvent.touches[0].clientX;
+   });
+   $('.wjs_banner').on('touchmove',function(e){
+     moveX = e.originalEvent.touches[0].clientX;
+     distanceX = moveX - startX;
+     isMove = true;
+     /*从左往右话是正的，上一张；
+       从右往左划是负的，下一张console.log(distanceX);*/
+   });
+   $('.wjs_banner').on('touchend',function(e){
+      /*需要与一定的滑动距离才认为它滑动过 必须移动50的距离才认为滑动过*/
+      if (Math.abs(distanceX) >50 && isMove) {
+      	/*判断对应的手势 来控制轮播图的滚动*/
+        /* 左下右上 左负右正 左向左滑*/
+        if (distanceX<0) {
+           /*向左滑动 下一张*/
+           $('.carousel').carousel('next');//bootstrap提供的方法
+        }else{
+           /*向右滑动 上一张*/
+           $('.carousel').carousel('prev');//bootstrap提供的方法
+        }
+      }
+      
+      /*参数重置*/
+      startX = 0;
+      moveX = 0;
+      distanceX = 0;
+      isMove = false;
+
+   });
 }

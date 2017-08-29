@@ -367,7 +367,8 @@
      /*渲染成html字符 解析成html*/
      var pointHtml = templatePoint({});
      /*渲染页面*/
-     $('.carousel-indicators').html(pointHtml);
+      $('.carousel-indicators').html(pointHtml);
+      $('.carousel-inner').html(imageHtml);
 
 > 1，2为静态渲染，如果动态渲染ajax中解析数据，将数据传入2.2{}中。
 
@@ -401,6 +402,8 @@
       var imageHtml = templateImage({model:imageData});
 
 5.2 html根据不同的屏幕加载不同的轮播图片，还没做到实时监测屏幕大小
+
+> html中图片模板中的model有两个参数
 
     <!-- 图片内容模板 -->
     <script type="text/template" id="template_item">
@@ -459,6 +462,75 @@
                 */
                 myData = data;
                callback && callback(myData);
-
             }
         });
+
+## 5.轮播图jQuery实现手动滑动  
+
+#### 5.1引用Bootstrap中JavaScript轮播图插件的参数 [原文链接](http://v3.bootcss.com/javascript/#carousel-options)
+
+     /*6.在移动端需要 通过手势来控制图片的轮播 左 next 右 prev*/
+    /* 
+     移动的如果是 负值下一张 正值上一张
+     用jQuery实现
+    */
+    var startX = 0;
+    var moveX = 0;
+    var distanceX = 0;
+    var isMove = false;
+    
+    /*绑定事件*/
+    $('.wjs_banner').on('touchstart',function(e){
+     /*怎么获取到第一个触摸点*/
+     /*jquery e 返回的 originalEvent 就是原声js当中的 touchEvent*/
+     // console.log(e.originalEvent.touches[0].clientX);
+     startX = e.originalEvent.touches[0].clientX;
+    });
+    
+    /*获取结束时，触摸点的位置*/
+    $('.wjs_banner').on('touchmove',function(e){
+     moveX = e.originalEvent.touches[0].clientX;
+     distanceX = moveX - startX;
+     isMove = true;
+     /*从左往右话是正的，上一张；
+       从右往左划是负的，下一张console.log(distanceX);*/
+    });
+    
+    /*根据滑动方向，变换上一张或下一张图片*/
+    $('.wjs_banner').on('touchend',function(e){
+      /*需要与一定的滑动距离才认为它滑动过 必须移动50的距离才认为滑动过*/
+      if (Math.abs(distanceX) >50 && isMove) {
+        /*判断对应的手势 来控制轮播图的滚动*/
+        /* 左下右上 左负右正 左向左滑*/
+        if (distanceX<0) {
+           /*向左滑动 下一张*/
+           $('.carousel').carousel('next');//bootstrap提供的方法
+        }else{
+           /*向右滑动 上一张*/
+           $('.carousel').carousel('prev');//bootstrap提供的方法
+        }
+      }
+      
+      /*参数重置*/
+      startX = 0;
+      moveX = 0;
+      distanceX = 0;
+      isMove = false;
+    
+     });
+
+## 6.响应式动态轮播图总结
+
+> 1. Bootstrap轮播图结构，及每个标签的用处，静态轮播图；<br>
+> 2. 根据pc端和移动端用不同大小的banner图片方式（pc端用的是背景，移动端用的是图片，原因是：①PC上要把banner图显示居中，固定盒子内的图片居中，图片比盒子大，所以用背景；②移动端要做图片的适配父盒子、子盒子、image都要求100%，所以使用图片），这里的弊端是有两张图片，所以要通过bootstrap响应式工具首先设置class类hidden-*，根据不同屏幕显示指定的某一张图片，但是这样还是会加载两张图片，网速不好会影响用户体验。<br> __解决方案：js动态渲染页面，用js判断根据不同的屏幕ajax请求指定的图片__<br>
+> 3. js动态渲染轮播图，用到模板引擎，[underscore中文文档链接](http://www.css88.com/doc/underscore/)，异步将图片渲染到页面上，正常的前后交互过程。<br>
+> 4. 模拟的后台数据放在index.json下，启动wamp模拟交互，Bootstrap中的Response.js不会在file开头的url地址栏触发，（这里没用到，回想一下）。<br>响应式轮播图的需求步骤为:<br>
+> ①获取后台的轮播图 图片数据 （ajax）<br>
+> ②需要判断当前的屏幕是移动端还是非移动端 （768px以下都是移动端）<br>
+> ③把后台数据渲染成对应的html字符串 （字符串拼接js来做 & 模板引擎 artTemplate native-template与underscore语法类似）<br>
+> ④把渲染完成的html填充在对应的盒子里面 也就是完成了页面渲染 （渲染到页面当中 .html()）<br>
+> ⑤在屏幕尺寸改变的时候需要重新渲染页面 （监听页面尺寸的改变事件 resize），这个事件后并且用到了jQuery中的即时执行.trigger('resize')；如果没有渲染成功 
+> `$('.carousel-indicators').html(pointHtml);`和`$('.carousel-inner').html(imageHtml);`可能出现了问题；<br>
+> ⑥在移动端需要 通过手势来控制图片的轮播 左 next 右 prev，通过控制台可以看出jquery e 返回的 originalEvent 就是原声js当中的 touchEvent。<br>
+
+
