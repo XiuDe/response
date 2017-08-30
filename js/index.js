@@ -3,6 +3,8 @@ $(function(){
 	banner();
 	/* 初始化页签页*/
 	initTabs();
+	/* 初始化标签工具提示*/
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 /*动态响应式轮播图方法*/

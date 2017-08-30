@@ -594,3 +594,67 @@
      console.log($(o).innerWidth());
 
  > 实现在移动端的滑动，ul外面需要一个盒子包裹`<div class="wjs_product_tabsParent"></div>`。
+ 
+     /*初始化tabs*/
+     function initTabs(){
+         /* 设置父容器的宽度等于 所有 的子容器的宽度的和*/
+         var ul = $('.wjs_product .nav-tabs');
+         var lis = ul.find('li');
+         // console.log(lis);
+         var width = 0;
+         $.each(lis,function(i,o){
+             /*通过width只获取了内容的宽度，内边距没有获取到-->innerWidth()*/
+             /*console.log($(o).width());*/
+             /*innerWidth()内容+内边距*/
+             /*outerWidth()内容+内边距+边框*/
+             /*outerWidth(true)内容+内边距+边框+外边距*/
+             /*console.log($(o).innerWidth());*/
+             width += $(o).innerWidth();
+         });
+         /*console.log(width);*/
+         ul.width(width);      
+         /*实现在移动端的滑动，ul外面需要一个盒子包裹，不要包裹tab-content*/
+         /*实现滑动,利用插件swipe.js*/
+         itcast.iScroll({
+             swipeDom:$('.wjs_product_tabsParent').get(0),
+             swipeType:'x',
+             swipeDistance:50
+         });
+     }
+
+#### 8.4不同屏幕实现标签页下不同的显示方式
+
+> 浮动优先，先占位置<br>
+> Bootstrap设置盒子中的文字左对齐`text-left`，右对齐`text-right`<br>
+> 圆的内阴影设置<br>
+>   1.阴影向上偏移```.product_box .box_right::before{top: -6px;box-shadow: 0 -2px 2px #d8d8d8 inset;}```<br>
+>   2.阴影向下偏移```.product_box .box_right::after{bottom: -6px;box-shadow: 0 2px 2px #d8d8d8 inset;}```《br》
+
+## 9.Bootstrap的[工具提示](http://v3.bootcss.com/javascript/#tooltips)插件和[进度条](http://v3.bootcss.com/components/#progress)组件
+
+#### 9.1工具提示属性
+
+     <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+
+> data-toggle="tooltip"样式<br>
+> data-placement="left"控制显示方向<br>
+> title="Tooltip on left"提示的信息<br>
+
+#### 9.2`you must initialize them yourself`
+
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    });
+
+#### 9.3进度条组件使用
+      <!-- 进度条 -->
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+            <span class="sr-only">60% Complete</span>
+        </div>
+    </div>
+
+##9.4 标签页出现的问题总结
+
+1. tab页签页的样式重定义覆盖，tab页签页在移动端会掉下来，解决方案把所有子元素的宽度总和算出来给父盒子这个宽度，在移动端设置滑动用到了自己封装的swipe组件。
+2. 商品盒子，利用两栏自适应布局，用了右浮动，浮动优先，栅格系统在左边嵌入，半圆阴影的使用，自定义字体标签的浮动。Bootstrap工具提示和滚动条的使用。
