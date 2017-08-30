@@ -540,3 +540,57 @@
 > Bootstrap左浮动class="pull-left" 右浮动class="pull-right"
 
 
+## 8.标签页[tab用Bootstrap](http://v3.bootcss.com/javascript/#tabs)实现
+
+#### 8.1Bootstrap标签页实现
+
+> 分析结构
+    <div>
+    <!-- 标签控制区块 -->
+    <!-- Nav tabs -->
+    <!-- 
+        a href 指明当前控制的是哪个内容容器 id class
+        data-toggle="tab"是必须声明的
+        一定要一一对应
+     -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+      <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+      <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+      <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+    </ul>
+    
+    <!-- 标签页的内容区块 -->
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="home">...</div>
+      <div role="tabpanel" class="tab-pane" id="profile">...</div>
+      <div role="tabpanel" class="tab-pane" id="messages">...</div>
+      <div role="tabpanel" class="tab-pane" id="settings">...</div>
+    </div>
+    
+    </div>
+
+
+#### 8.2自定义组件
+ 
+ * 将nav-tabs的bootstrap样式全部拷过来查找， sublime中`ctrl+p`、`#nav-tabs`。
+ * 为了避免自定义的组件将原来bootstrap组件覆盖，把css中的`.nav-tabs`修改为`.wjs_product .nav-tabs`。
+    - 菜单栏中的查找，查找到所有的然后替换。
+ * bootstrap中的点击没有下边框用了`margin-bottom: -1px;`去掉。
+ * __修改样式，自定义样式是覆盖掉原来的样式，不是删掉。__
+ 
+#### 8.3tab标签要在移动端能够左右滑动
+
+> 在移动端初始我们的页签页，利用js实现。
+
+> 获取内容宽度
+<!--  -->
+     /*通过width只获取了内容的宽度，内边距没有获取到-->innerWidth()*/
+     /*console.log($(o).width());*/
+     /*innerWidth()内容+内边距*/
+     /*outerWidth()内容+内边距+边框*/
+     /*outerWidth(true)内容+内边距+边框+外边距*/
+     console.log($(o).innerWidth());
+
+ > 实现在移动端的滑动，ul外面需要一个盒子包裹`<div class="wjs_product_tabsParent"></div>`。

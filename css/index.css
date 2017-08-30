@@ -335,8 +335,11 @@ fieldset[disabled] .wjs_nav .btn-link:focus {
   padding: 25px 0;
   border: 1px solid #ccc;
 }
-.wjs_book .container{
-  width: 910px;
+
+@media screen and (min-height: 1200px){
+  .wjs_book .container{
+    width: 910px; 
+  }
 }
 .wjs_book .wjs_icon{
   font-size: 24px;
@@ -347,4 +350,85 @@ fieldset[disabled] .wjs_nav .btn-link:focus {
 }
 .wjs_book .media_link:hover{
   color: red;
+}
+/* 商品 */
+.wjs_product{
+  padding: 30px 0;
+  background-color: #f5f5f5;
+}
+
+/*自定义组件*/
+.wjs_product .nav-tabs {
+  border-bottom: 1px solid #ddd;
+}
+.wjs_product .nav-tabs > li {
+  float: left;
+  padding-left: 20px;
+}
+.wjs_product .nav-tabs > li > a {
+  margin-right: 0;
+  line-height: 1.42857143;
+  border: none;
+  border-radius: 4px 4px 0 0;
+}
+.wjs_product .nav-tabs > li > a:hover {
+  border-color: #eee #eee #ddd;
+  background-color: #f5f5f5;
+}
+.wjs_product .nav-tabs > li.active > a,
+.wjs_product .nav-tabs > li.active > a:hover,
+.wjs_product .nav-tabs > li.active > a:focus {
+  color: #555;
+  cursor: default;
+  background-color: #f5f5f5;
+  border: none;
+  border-bottom: 3px solid #e92322;
+}
+.wjs_product .nav-tabs.nav-justified {
+  width: 100%;
+  border-bottom: 0;
+}
+.wjs_product .nav-tabs.nav-justified > li {
+  float: none;
+}
+.wjs_product .nav-tabs.nav-justified > li > a {
+  margin-bottom: 5px;
+  text-align: center;
+}
+.wjs_product .nav-tabs.nav-justified > .dropdown .dropdown-menu {
+  top: auto;
+  left: auto;
+}
+@media (min-width: 768px) {
+  .wjs_product .nav-tabs.nav-justified > li {
+    display: table-cell;
+    width: 1%;
+  }
+  .wjs_product .nav-tabs.nav-justified > li > a {
+    margin-bottom: 0;
+  }
+}
+.wjs_product .nav-tabs.nav-justified > li > a {
+  margin-right: 0;
+  border-radius: 4px;
+}
+.wjs_product .nav-tabs.nav-justified > .active > a,
+.wjs_product .nav-tabs.nav-justified > .active > a:hover,
+.wjs_product .nav-tabs.nav-justified > .active > a:focus {
+  border: 1px solid #ddd;
+}
+@media (min-width: 768px) {
+  .wjs_product .nav-tabs.nav-justified > li > a {
+    border-bottom: 1px solid #ddd;
+    border-radius: 4px 4px 0 0;
+  }
+  .wjs_product .nav-tabs.nav-justified > .active > a,
+  .wjs_product .nav-tabs.nav-justified > .active > a:hover,
+  .wjs_product .nav-tabs.nav-justified > .active > a:focus {
+    border-bottom-color: #fff;
+  }
+}
+
+.wjs_product .wjs_product_tabsParent{
+   overflow: hidden;
 }

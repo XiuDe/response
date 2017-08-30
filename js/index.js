@@ -1,6 +1,8 @@
 $(function(){
 	/* 动态响应式轮播图*/
 	banner();
+	/* 初始化页签页*/
+	initTabs();
 });
 
 /*动态响应式轮播图方法*/
@@ -149,4 +151,34 @@ function banner(){
       isMove = false;
 
    });
+
+}
+
+
+/*初始化tabs*/
+function initTabs(){
+	/* 设置父容器的宽度等于 所有 的子容器的宽度的和*/
+	var ul = $('.wjs_product .nav-tabs');
+	var lis = ul.find('li');
+	// console.log(lis);
+	var width = 0;
+	$.each(lis,function(i,o){
+		/*通过width只获取了内容的宽度，内边距没有获取到-->innerWidth()*/
+        /*console.log($(o).width());*/
+        /*innerWidth()内容+内边距*/
+        /*outerWidth()内容+内边距+边框*/
+        /*outerWidth(true)内容+内边距+边框+外边距*/
+        /*console.log($(o).innerWidth());*/
+        width += $(o).innerWidth();
+	});
+	/*console.log(width);*/
+	ul.width(width);
+
+	/*实现在移动端的滑动，ul外面需要一个盒子包裹，不要包裹tab-content*/
+	/*实现滑动,利用插件swipe.js*/
+	itcast.iScroll({
+		swipeDom:$('.wjs_product_tabsParent').get(0),
+		swipeType:'x',
+		swipeDistance:50
+	});
 }
