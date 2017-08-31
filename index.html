@@ -43,7 +43,8 @@
         </div>
     </header>
     <!-- 导航栏 -->
-    <nav class="navbar wjs_nav">
+    <!-- 固定导航栏 固定位置显示浮动，使用affix，data-spy="affix"-->
+    <nav class="navbar wjs_nav" data-spy="affix" data-offset-top="41">
       <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -276,7 +277,7 @@
                                 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
                                   <span class="sr-only">60% Complete</span>
                                 </div>
-                              </div>>
+                              </div>
                           </div>
                       </div>
                       
@@ -353,9 +354,80 @@
      </div>
     </div>
     <!-- 新闻 -->
-    <div class="wjs_news"></div>
+    <div class="wjs_news">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-2">
+                    <div class="wjs_news_title">全部新闻</div>
+                </div>
+
+                <div class="col-md-1">
+                   <!-- 竖线 -->
+                   <div class="wjs_news_line hidden-sm hidden-xs"></div>
+                   <!-- Nav tabs -->
+                   <ul class="nav wjs_news_tabs" role="tablist">
+                     <li role="presentation" class="active">
+                        <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+                          <span class="wjs_icon wjs_icon_new01"></span>
+                        </a>
+                     </li>
+                     <li role="presentation">
+                        <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+                           <span class="wjs_icon wjs_icon_new02"></span>
+                        </a>
+                     </li>
+                     <li role="presentation">
+                        <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
+                           <span class="wjs_icon wjs_icon_new03"></span>
+                        </a>
+                     </li>
+                     <li role="presentation">
+                        <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">
+                           <span class="wjs_icon wjs_icon_new04"></span>
+                        </a>
+                     </li>
+                   </ul>
+                </div>
+
+                <div class="col-md-7">
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="home">
+                       <ul>
+                           <li><span class="hidden-xs">2016-01-22</span>&nbsp;[微还款]&nbsp;一周还款公告&nbsp;2016年1月18日-1月24日</li>
+                           <li><span class="hidden-xs">2016-01-22</span>&nbsp;[微还款]&nbsp;一周还款公告&nbsp;2016年1月18日-1月24日</li>
+                           <li><span class="hidden-xs">2016-01-22</span>&nbsp;[微还款]&nbsp;一周还款公告&nbsp;2016年1月18日-1月24日</li>
+                           <li><span class="hidden-xs">2016-01-22</span>&nbsp;[微还款]&nbsp;一周还款公告&nbsp;2016年1月18日-1月24日</li>
+                           <li><span class="hidden-xs">2016-01-22</span>&nbsp;[微还款]&nbsp;一周还款公告&nbsp;2016年1月18日-1月24日</li>
+                           <li><span class="hidden-xs">2016-01-22</span>&nbsp;[微还款]&nbsp;一周还款公告&nbsp;2016年1月18日-1月24日</li>
+                           <li><span class="hidden-xs">2016-01-22</span>&nbsp;[微还款]&nbsp;一周还款公告&nbsp;2016年1月18日-1月24日</li>
+                           <li><span class="hidden-xs">2016-01-22</span>&nbsp;[微还款]&nbsp;一周还款公告&nbsp;2016年1月18日-1月24日</li>
+                       </ul>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="profile">2</div>
+                    <div role="tabpanel" class="tab-pane" id="messages">3</div>
+                    <div role="tabpanel" class="tab-pane" id="settings">4</div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- 合作伙伴 -->
-    <footer class="wjs_footer"></footer>
+    <footer class="wjs_footer">
+      <div class="container">
+        <h3 class="text-center">合作伙伴</h3>
+        <ul>
+            <li><a href="#" class="wjs_icon wjs_icon_partner01"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner02"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner03"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner04"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner05"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner06"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner07"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner08"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner09"></a></li>
+        </ul>
+      </div>
+    </footer>
 
     <!-- 点盒子内容模板 -->
     <!-- 传入的model是一个数组，模板当中运行的也是js，包裹在<%%>才会被执行 -->

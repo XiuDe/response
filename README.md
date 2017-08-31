@@ -654,7 +654,96 @@
         </div>
     </div>
 
-##9.4 标签页出现的问题总结
+## 9.4 标签页出现的问题总结
 
 1. tab页签页的样式重定义覆盖，tab页签页在移动端会掉下来，解决方案把所有子元素的宽度总和算出来给父盒子这个宽度，在移动端设置滑动用到了自己封装的swipe组件。
 2. 商品盒子，利用两栏自适应布局，用了右浮动，浮动优先，栅格系统在左边嵌入，半圆阴影的使用，自定义字体标签的浮动。Bootstrap工具提示和滚动条的使用。
+
+## 10.新闻区域响应式制作
+
+#### 10.1栅格系统偏移及列偏移
+
+      <div class="container">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-2">
+                    <div class="wjs_news_title">全部新闻</div>
+                </div>
+                <div class="col-md-1">2</div>
+                <div class="col-md-7">3</div>
+            </div>
+        </div>
+
+#### 10.2Bootstrap中tab栏的竖直重置
+
+> Bootstrap中[Javascript插件](http://v3.bootcss.com/javascript/#tabs)
+
+> 根据需求将js插件 分别放入我们的两个盒子中
+
+        <div class="col-md-2 col-md-offset-2">
+            <div class="wjs_news_title">全部新闻</div>
+        </div>
+    
+        <div class="col-md-1">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+            </ul>
+        </div>
+                
+        <div class="col-md-7">
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="home">1</div>
+              <div role="tabpanel" class="tab-pane" id="profile">2</div>
+              <div role="tabpanel" class="tab-pane" id="messages">3</div>
+              <div role="tabpanel" class="tab-pane" id="settings">4</div>
+            </div>
+        </div>
+
+#### 10.4重置原样式
+
+> 1.因为之前用到过这个插件所以将`nav-tabs`逐个替换成```wjs_news_tabs```html与css都要替换重置。<br>
+> 2.tab鼠标悬浮会出现抖动删除`a`标签下的`border: 1px solid transparent;`防止抖动。<br>
+> 3.引入自定义字体。<br>
+> 4.Bootstrap中栅格系统的父元素都定为了`position:relative;`。
+
+#### 10.5竖直tab栏的响应式
+ 1. 小屏幕下竖直tab栏变为水平，左右有间距。
+ 
+        · 超小屏幕下百分比控制间距。
+        · 小屏幕下固定间距。
+        · 中等屏幕以上没有变化。
+        · 大屏幕是竖直的。
+
+ 2. 虚线隐藏。
+ 3. 时间隐藏。
+
+## 11.合作伙伴注意问题
+
+> 使用预定义的字体，引入图标
+
+    <div class="container">
+        <h3 class="text-center">合作伙伴</h3>
+        <ul>
+            <li><a href="#" class="wjs_icon wjs_icon_partner01"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner02"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner03"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner04"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner05"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner06"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner07"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner08"></a></li>
+            <li><a href="#" class="wjs_icon wjs_icon_partner09"></a></li>
+        </ul>
+      </div>
+
+## 12.固定导航条设置引用Bootstrap中的js插件[Affix](http://v3.bootcss.com/javascript/#affix) 
+
+     <div data-spy="affix" data-offset-top="60" data-offset-bottom="200">
+       ...
+     </div>
+
+## 响应式总结
+> 响应式适应各个终端，这里适应了四个终端，看需求，适配几种终端。
